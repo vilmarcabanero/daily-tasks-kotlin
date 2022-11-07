@@ -19,6 +19,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
@@ -49,7 +50,9 @@ fun TasksListScreen(
             val calendar = Calendar.getInstance()
             val simpleDateFormat = SimpleDateFormat("EEEE, d LLLL")
             val dateTime = simpleDateFormat.format(calendar.time).toString()
-            Row(horizontalArrangement = Arrangement.End, modifier = Modifier.padding(14.dp).fillMaxWidth()) {
+            Row(horizontalArrangement = Arrangement.End, modifier = Modifier
+                .padding(14.dp)
+                .fillMaxWidth()) {
                 Text(text = dateTime)
             }
             Box(contentAlignment = Alignment.TopStart, modifier = Modifier
@@ -67,26 +70,23 @@ fun TasksListScreen(
             Row(modifier = Modifier
                 .height(50.dp)
                 .weight(0.07f)
-                .padding(3.dp)) {
+                .padding(3.dp)
+                .padding(end = 6.dp)) {
                 BasicTextField(value = state.value.taskTitle,
                     onValueChange = { setTaskTitle(it) },
                     decorationBox = {
-                        Box(Modifier
-                            .padding(12.dp)) {
+                        Box(Modifier.padding(12.dp)) {
                             if (state.value.taskTitle.isEmpty()) {
                                 Text("New task", style = TextStyle(fontSize = 16.sp, color = Color(0xFF8d8d8d)))
                             }
                             it()
                         }
                     },
-                    modifier = Modifier
-                        .weight(1f),
+                    modifier = Modifier.weight(1f),
                     textStyle = TextStyle(fontSize = 16.sp, color = MaterialTheme.colors.onBackground),
-                    cursorBrush = SolidColor(MaterialTheme.colors.onBackground)
-                )
-                IconButton(onClick = { onInsertTask(state.value.taskTitle) },
-                ) {
-                    Icon(imageVector = Icons.Filled.Add, contentDescription = "Add")
+                    cursorBrush = SolidColor(MaterialTheme.colors.primary))
+                IconButton(onClick = { onInsertTask(state.value.taskTitle) }, ) {
+                    Icon(imageVector = Icons.Filled.Add, contentDescription = "Add", tint = MaterialTheme.colors.primary)
                 }
             }
         }

@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.entalpiya.dailytasks.core.presentation.MainViewModel
 import com.entalpiya.dailytasks.feature_tasks.data.data_source.local.model.TaskEntity
 import com.entalpiya.dailytasks.feature_tasks.data.data_source.local.model.TaskMakeCompleteEntity
 import com.entalpiya.dailytasks.feature_tasks.domain.use_case.TasksUseCases
@@ -28,6 +29,7 @@ class TasksListViewModel @Inject constructor(private val useCases: TasksUseCases
 
     init {
         getTasks()
+        _state.value = _state.value.copy(isSplashScreenLoading = false)
     }
 
     private fun getTasks() {

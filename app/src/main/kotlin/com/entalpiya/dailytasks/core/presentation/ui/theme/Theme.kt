@@ -11,10 +11,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import com.entalpiya.dailytasks.R
 
-private val DarkColorPalette = darkColors(primary = Purple200, primaryVariant = Purple700, secondary = Teal200)
+private val DarkColorPalette = darkColors(primary = BluePrimary, primaryVariant = Purple700, secondary = Teal200)
 
-private val LightColorPalette = lightColors(primary = Purple500, primaryVariant = Purple700, secondary = Teal200
+private val LightColorPalette = lightColors(primary = BluePrimary, primaryVariant = Purple700, secondary = Teal200
 
     /* Other default colors to override
     background = Color.White,
@@ -32,7 +33,6 @@ fun DailyTasksTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Compos
     } else {
         LightColorPalette
     }
-
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {

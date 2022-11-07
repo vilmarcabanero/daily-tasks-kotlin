@@ -6,4 +6,5 @@ data class TasksListState(
     val tasks: List<TaskEntity> = listOf(),
     val error: String? = null,
     val taskTitle: String = "",
+    val isSplashScreenLoading: Boolean = true,
 )
