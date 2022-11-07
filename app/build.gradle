@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace "com.entalpiya.dailytasks"
+    namespace "com.entalpiya.entasks"
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.entalpiya.dailytasks"
+        applicationId "com.entalpiya.entasks"
         minSdk 21
         targetSdk 33
         versionCode 1

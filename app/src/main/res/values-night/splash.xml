@@ -2,6 +2,6 @@
 <resources>
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">#131313</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_baseline_compress_24</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/banner_logo</item>
     </style>
 </resources>
