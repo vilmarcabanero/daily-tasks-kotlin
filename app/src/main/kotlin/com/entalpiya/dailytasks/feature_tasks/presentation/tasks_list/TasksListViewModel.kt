@@ -1,7 +1,5 @@
 package com.entalpiya.dailytasks.feature_tasks.presentation.tasks_list
 
-
-import androidx.compose.ui.graphics.Color
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -13,6 +11,7 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
+import kotlin.random.Random
 
 @HiltViewModel
 class TasksListViewModel @Inject constructor(private val useCases: TasksUseCases) : ViewModel() {
@@ -56,13 +55,23 @@ class TasksListViewModel @Inject constructor(private val useCases: TasksUseCases
             if ("::" in taskTitle) {
                 taskTitleList = taskTitle.split("::")
                 category = taskTitleList[0]
-                title = taskTitleList[1]
+                title = taskTitleList[1].trim()
             } else {
-                title = taskTitle
+                title = taskTitle.trim()
             }
 
+            var color: Long = when (category) {
+                "EN" -> 0xFF0E9FFF
+                "DD" -> 0xFF9B00FA
+                else -> Random.nextLong()
+            }
 
-            useCases.insertTask(Task(id = UUID.randomUUID().toString(), title = title, isCompleted = false, category = category))
+            if(title.isEmpty()) return@launch
+            useCases.insertTask(Task(id = UUID.randomUUID().toString(),
+                title = title,
+                isCompleted = false,
+                category = category,
+                color = color))
             val tasks = useCases.getTasks()
             _state.value = _state.value.copy(tasks = tasks, taskTitle = "")
         }
