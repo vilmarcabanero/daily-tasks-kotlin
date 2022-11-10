@@ -2,11 +2,11 @@ package com.entalpiya.dailytasks.feature_tasks.data.data_source.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.entalpiya.dailytasks.feature_tasks.data.data_source.local.model.TaskEntity
+import com.entalpiya.dailytasks.feature_tasks.data.data_source.local.model.LocalTask
 
 @Database(
-    entities = [TaskEntity::class],
-    version = 6,
+    entities = [LocalTask::class],
+    version = 5,
     exportSchema = false
 )
 abstract class TasksDatabase : RoomDatabase() {

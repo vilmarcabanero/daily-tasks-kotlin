@@ -1,7 +1,7 @@
 package com.entalpiya.dailytasks.feature_tasks.data.repository
 
 import com.entalpiya.dailytasks.feature_tasks.data.data_source.local.TasksDao
-import com.entalpiya.dailytasks.feature_tasks.data.data_source.local.model.TaskEntity
+import com.entalpiya.dailytasks.feature_tasks.data.data_source.local.model.LocalTask
 import com.entalpiya.dailytasks.feature_tasks.data.data_source.local.model.TaskMakeCompleteEntity
 import com.entalpiya.dailytasks.feature_tasks.domain.model.Task
 import com.entalpiya.dailytasks.feature_tasks.domain.repository.TasksRepository

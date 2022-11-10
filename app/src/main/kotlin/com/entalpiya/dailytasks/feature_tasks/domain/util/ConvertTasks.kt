@@ -1,22 +1,22 @@
 package com.entalpiya.dailytasks.feature_tasks.domain.util
 
-import com.entalpiya.dailytasks.feature_tasks.data.data_source.local.model.TaskEntity
+import com.entalpiya.dailytasks.feature_tasks.data.data_source.local.model.LocalTask
 import com.entalpiya.dailytasks.feature_tasks.domain.model.Task
 
 class ConvertTasks {
-    fun fromLocal(localTasks: List<TaskEntity>): List<Task> {
+    fun fromLocal(localTasks: List<LocalTask>): List<Task> {
         return localTasks.map { ConvertTask().fromLocal(it)}
     }
 
-    fun fromRemote(remoteTasks: List<TaskEntity>): List<Task> {
+    fun fromRemote(remoteTasks: List<LocalTask>): List<Task> {
         return remoteTasks.map { ConvertTask().fromRemote(it) }
     }
 
-    fun toLocal(tasks: List<Task>): List<TaskEntity> {
+    fun toLocal(tasks: List<Task>): List<LocalTask> {
         return tasks.map { ConvertTask().toLocal(it) }
     }
 
-    fun toRemote(tasks: List<Task>): List<TaskEntity> {
+    fun toRemote(tasks: List<Task>): List<LocalTask> {
         return tasks.map { ConvertTask().toRemote(it) }
     }
 }
