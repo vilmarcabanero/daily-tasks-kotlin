@@ -6,7 +6,7 @@ import com.entalpiya.dailytasks.feature_tasks.data.data_source.local.model.TaskE
 
 @Database(
     entities = [TaskEntity::class],
-    version = 5,
+    version = 6,
     exportSchema = false
 )
 abstract class TasksDatabase : RoomDatabase() {

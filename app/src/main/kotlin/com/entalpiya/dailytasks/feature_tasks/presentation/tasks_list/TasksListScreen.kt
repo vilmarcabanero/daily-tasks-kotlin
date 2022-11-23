@@ -1,9 +1,15 @@
 package com.entalpiya.dailytasks.feature_tasks.presentation.tasks_list
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import com.entalpiya.dailytasks.feature_tasks.presentation.tasks_list.components.TaskInput
 import com.entalpiya.dailytasks.feature_tasks.presentation.tasks_list.components.TaskInputProps
 
@@ -21,7 +27,7 @@ fun TasksListScreen(
         Column {
             TaskTitle()
             TaskList(modifier = Modifier.weight(0.8f), props = TaskListProps(state = state, onTaskClick = onTaskClick))
-            TaskInput(modifier = Modifier.weight(0.07f), props = TaskInputProps(state, setTaskTitle, onInsertTask))
+            TaskInput(modifier = Modifier, props = TaskInputProps(state, setTaskTitle, onInsertTask))
         }
     }
 }

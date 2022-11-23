@@ -11,4 +11,5 @@ data class TaskEntity(
     @ColumnInfo(name = "title") val title: String,
     @ColumnInfo(name = "is_completed") val isCompleted: Boolean,
     @ColumnInfo(name = "category") val category: String?,
+    @ColumnInfo(name = "color") val color: Long,
 )
