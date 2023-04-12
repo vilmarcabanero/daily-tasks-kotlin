@@ -49,7 +49,7 @@ class TasksListViewModel @Inject constructor(private val useCases: TasksUseCases
 
     fun insertTask(taskTitle: String) {
         viewModelScope.launch(errorHandler) {
-            var taskTitleList: List<String> = emptyList()
+            val taskTitleList: List<String>
             var category: String? = null
             val title: String
             if ("::" in taskTitle) {
@@ -60,7 +60,7 @@ class TasksListViewModel @Inject constructor(private val useCases: TasksUseCases
                 title = taskTitle.trim()
             }
 
-            var color: Long = when (category) {
+            val color: Long = when (category) {
                 "EN" -> 0xFF0E9FFF
                 "DD" -> 0xFF9B00FA
                 else -> Random.nextLong()
