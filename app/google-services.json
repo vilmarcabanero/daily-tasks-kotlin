@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "947720312120",
+    "project_id": "daily-tasks-94a06",
+    "storage_bucket": "daily-tasks-94a06.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947720312120:android:6f77ee82da34d1c43bddcd",
+        "android_client_info": {
+          "package_name": "com.entalpiya.dailytasks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "947720312120-9svup6ppum5d6ptoennbbai1f1ktq34e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtihW044VL1T8gFJPCfENf270x4DRsm1k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "947720312120-9svup6ppum5d6ptoennbbai1f1ktq34e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
