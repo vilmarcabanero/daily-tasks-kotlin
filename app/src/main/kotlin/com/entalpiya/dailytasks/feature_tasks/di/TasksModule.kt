@@ -56,13 +56,6 @@ object TasksModule {
         )
     }
 
-    @Singleton
-    @Provides
-    fun provideRetrofit(): Retrofit {
-        return Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("https://daily-tasks-api-nestjs.onrender.com/api/").build()
-    }
-
     @Provides
     fun provideRetrofitApi(retrofit: Retrofit): TasksApiService {
         return retrofit.create(TasksApiService::class.java)

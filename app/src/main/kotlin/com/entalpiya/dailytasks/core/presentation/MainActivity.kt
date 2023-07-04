@@ -23,6 +23,9 @@ import com.entalpiya.dailytasks.core.presentation.ui.theme.enTasksTheme
 import com.entalpiya.dailytasks.feature_auth.presentation.google_signin.GoogleAuthUiClient
 import com.entalpiya.dailytasks.feature_auth.presentation.google_signin.SignInScreen
 import com.entalpiya.dailytasks.feature_auth.presentation.google_signin.SignInViewModel
+import com.entalpiya.dailytasks.feature_auth.presentation.login.LoginScreen
+import com.entalpiya.dailytasks.feature_auth.presentation.login.LoginScreenProps
+import com.entalpiya.dailytasks.feature_auth.presentation.login.LoginViewModel
 import com.entalpiya.dailytasks.feature_auth.presentation.profile.ProfileScreen
 import com.entalpiya.dailytasks.feature_tasks.presentation.tasks_list.TasksListScreen
 import com.entalpiya.dailytasks.feature_tasks.presentation.tasks_list.TasksListViewModel
@@ -58,7 +61,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun enTasksApp() {
         val navController = rememberNavController()
-        NavHost(navController, startDestination = "tasks") {
+        NavHost(navController, startDestination = "login") {
             composable("tasks") {
                 val viewModel: TasksListViewModel = hiltViewModel()
                 mainViewModel.setIsLoading(viewModel.state.value.isSplashScreenLoading)
@@ -66,6 +69,16 @@ class MainActivity : ComponentActivity() {
                     onTaskClick = { id, oldValue -> viewModel.makeCompleteTask(id, oldValue) },
                     setTaskTitle = { taskTitle -> viewModel.setTaskTitle(taskTitle) },
                     onInsertTask = { taskTitle -> viewModel.insertTask(taskTitle) }
+                )
+            }
+            composable("login") {
+                val viewModel: LoginViewModel = hiltViewModel()
+                mainViewModel.setIsLoading(viewModel.state.value.isSplashScreenLoading)
+                LoginScreen (
+                   props = LoginScreenProps(state = viewModel.state,
+                       setEmail = { email -> viewModel.setEmail(email)},
+                       setPassword = { password -> viewModel.setPassword(password)},
+                       handleLogin = { loginPayload -> viewModel.handleLogin(loginPayload) })
                 )
             }
             composable("sign_in") {
