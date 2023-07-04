@@ -58,7 +58,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun enTasksApp() {
         val navController = rememberNavController()
-        NavHost(navController, startDestination = "sign_in") {
+        NavHost(navController, startDestination = "tasks") {
             composable("tasks") {
                 val viewModel: TasksListViewModel = hiltViewModel()
                 mainViewModel.setIsLoading(viewModel.state.value.isSplashScreenLoading)

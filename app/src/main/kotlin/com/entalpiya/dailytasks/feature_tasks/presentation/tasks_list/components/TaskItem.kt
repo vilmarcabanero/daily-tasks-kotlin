@@ -22,7 +22,6 @@ import kotlin.random.Random
 fun TaskItem(task: Task, onTaskClick: (id: String, oldValue: Boolean) -> Unit) {
     Box(modifier = Modifier.clickable { onTaskClick(task.id, !task.isCompleted) }) {
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(horizontal = 12.dp, vertical = 2.dp)) {
-            Icon(imageVector = Icons.Filled.Check, contentDescription = "Task", tint = Color(task.color))
             Spacer(modifier = Modifier.weight(0.04f))
             Text(text = task.title, modifier = Modifier.weight(0.9f))
         }

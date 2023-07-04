@@ -7,5 +7,5 @@ data class Task(
     val title: String,
     val isCompleted: Boolean,
     val category: String?,
-    val color: Long,
+    val color: Long?,
 )

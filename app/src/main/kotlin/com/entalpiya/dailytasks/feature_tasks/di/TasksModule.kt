@@ -2,6 +2,7 @@ package com.entalpiya.dailytasks.feature_tasks.di
 
 import android.content.Context
 import androidx.room.Room
+import com.entalpiya.dailytasks.feature_tasks.data.data_source.api.TasksApiService
 import com.entalpiya.dailytasks.feature_tasks.data.data_source.local.TasksDao
 import com.entalpiya.dailytasks.feature_tasks.data.data_source.local.TasksDatabase
 import com.entalpiya.dailytasks.feature_tasks.data.repository.TasksRepositoryImpl
@@ -16,6 +17,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -38,8 +41,8 @@ object TasksModule {
 
     @Provides
     @Singleton
-    fun provideTasksRepository(db: TasksDatabase): TasksRepository {
-        return TasksRepositoryImpl(db.dao)
+    fun provideTasksRepository(db: TasksDatabase, restInterface: TasksApiService): TasksRepository {
+        return TasksRepositoryImpl(restInterface, db.dao)
     }
 
     @Provides
@@ -51,5 +54,17 @@ object TasksModule {
             deleteTask = DeleteTask(repository),
             makeComplete = MakeComplete(repository)
         )
+    }
+
+    @Singleton
+    @Provides
+    fun provideRetrofit(): Retrofit {
+        return Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://daily-tasks-api-nestjs.onrender.com/api/").build()
+    }
+
+    @Provides
+    fun provideRetrofitApi(retrofit: Retrofit): TasksApiService {
+        return retrofit.create(TasksApiService::class.java)
     }
 }
