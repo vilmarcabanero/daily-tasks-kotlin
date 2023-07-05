@@ -5,18 +5,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import com.entalpiya.dailytasks.feature_auth.data.data_source.api.payload.LoginPayload
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.entalpiya.dailytasks.feature_auth.presentation.login.components.LoginInputsAndButton
 import com.entalpiya.dailytasks.feature_auth.presentation.login.components.LoginInputsAndButtonProps
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
+
+@Destination(start = true)
 @Composable
-fun LoginScreen(props: LoginScreenProps) {
-
+fun LoginScreen(navigator: DestinationsNavigator, vm: LoginViewModel = hiltViewModel()) {
     Surface {
         Box(
             modifier = Modifier
@@ -27,21 +28,10 @@ fun LoginScreen(props: LoginScreenProps) {
             LoginInputsAndButton(
                 modifier = Modifier,
                 props = LoginInputsAndButtonProps(
-                    props.state,
-                    props.setEmail,
-                    props.setPassword,
-                    props.handleLogin,
-                    props.navController,
+                    vm,
+                    navigator,
                 )
             )
         }
     }
 }
-
-data class LoginScreenProps(
-    val state: State<LoginState>,
-    val setEmail: (email: String) -> Unit,
-    val setPassword: (password: String) -> Unit,
-    val handleLogin: (loginPayload: LoginPayload) -> Unit,
-    val navController: NavHostController,
-)

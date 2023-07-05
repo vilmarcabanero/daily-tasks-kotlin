@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.entalpiya.dailytasks.feature_tasks.presentation.tasks_list.TasksListState
+import com.entalpiya.dailytasks.feature_tasks.presentation.tasks_list.TasksListViewModel
 
 @Composable
 fun TaskInput(modifier: Modifier, props: TaskInputProps) {
@@ -27,15 +28,15 @@ fun TaskInput(modifier: Modifier, props: TaskInputProps) {
             .padding(end = 6.dp),
         verticalAlignment = Alignment.Bottom) {
             TextField(
-                value = props.state.value.taskTitle,
-                onValueChange = { props.setTaskTitle(it) },
+                value = props.vm.state.value.taskTitle,
+                onValueChange = { props.vm.setTaskTitle(it) },
                 placeholder = { Text(text = "New task") },
                 colors = TextFieldDefaults.textFieldColors(
                     backgroundColor =  MaterialTheme.colors.background
                 ),
                 modifier = Modifier.weight(1f)
             )
-            IconButton(onClick = { props.onInsertTask(props.state.value.taskTitle) }) {
+            IconButton(onClick = { props.vm.insertTask(props.vm.state.value.taskTitle) }) {
                 Icon(imageVector = Icons.Filled.Add, contentDescription = "Add", tint = MaterialTheme.colors.primary)
             }
         }
@@ -43,7 +44,5 @@ fun TaskInput(modifier: Modifier, props: TaskInputProps) {
 }
 
 data class TaskInputProps(
-    val state: State<TasksListState>,
-    val setTaskTitle: (taskTitle: String) -> Unit,
-    val onInsertTask: (taskTitle: String) -> Unit,
+    val vm: TasksListViewModel,
 )

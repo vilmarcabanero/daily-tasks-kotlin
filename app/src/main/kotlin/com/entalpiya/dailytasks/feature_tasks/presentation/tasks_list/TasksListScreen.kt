@@ -10,24 +10,23 @@ import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.entalpiya.dailytasks.feature_tasks.presentation.tasks_list.components.TaskInput
 import com.entalpiya.dailytasks.feature_tasks.presentation.tasks_list.components.TaskInputProps
 
 import com.entalpiya.dailytasks.feature_tasks.presentation.tasks_list.components.TaskList
 import com.entalpiya.dailytasks.feature_tasks.presentation.tasks_list.components.TaskListProps
 import com.entalpiya.dailytasks.feature_tasks.presentation.tasks_list.components.TaskTitle
+import com.ramcosta.composedestinations.annotation.Destination
+
+@Destination
 @Composable
-fun TasksListScreen(
-    state: State<TasksListState>,
-    onTaskClick: (id: String, oldValue: Boolean) -> Unit,
-    setTaskTitle: (taskTitle: String) -> Unit,
-    onInsertTask: (taskTitle: String) -> Unit,
-) {
-    Surface() {
+fun TasksListScreen(vm: TasksListViewModel = hiltViewModel()) {
+    Surface {
         Column {
             TaskTitle()
-            TaskList(modifier = Modifier.weight(0.8f), props = TaskListProps(state = state, onTaskClick = onTaskClick))
-            TaskInput(modifier = Modifier, props = TaskInputProps(state, setTaskTitle, onInsertTask))
+            TaskList(modifier = Modifier.weight(0.8f), props = TaskListProps(vm))
+            TaskInput(modifier = Modifier, props = TaskInputProps(vm))
         }
     }
 }

@@ -26,7 +26,7 @@ private val LightColorPalette = lightColors(primary = BluePrimary, primaryVarian
     */)
 
 @Composable
-fun enTasksTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+fun EnTasksTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {

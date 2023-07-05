@@ -20,7 +20,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.entalpiya.dailytasks.feature_auth.presentation.google_signin.UserData
+import com.ramcosta.composedestinations.annotation.Destination
 
+@Destination
 @Composable
 fun ProfileScreen(
     userData: UserData?,

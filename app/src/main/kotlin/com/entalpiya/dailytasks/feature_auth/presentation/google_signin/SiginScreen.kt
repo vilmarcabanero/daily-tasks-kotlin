@@ -13,8 +13,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.ramcosta.composedestinations.annotation.Destination
 import kotlinx.coroutines.flow.StateFlow
 
+@Destination
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun SignInScreen(

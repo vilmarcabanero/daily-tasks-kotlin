@@ -1,12 +1,8 @@
 package com.entalpiya.dailytasks.feature_auth.presentation.login.components
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -16,9 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
+import com.entalpiya.dailytasks.destinations.TasksListScreenDestination
 import com.entalpiya.dailytasks.feature_auth.data.data_source.api.payload.LoginPayload
 import com.entalpiya.dailytasks.feature_auth.presentation.login.LoginState
+import com.entalpiya.dailytasks.feature_auth.presentation.login.LoginViewModel
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
 fun LoginInputsAndButton(modifier: Modifier, props: LoginInputsAndButtonProps) {
@@ -29,8 +27,8 @@ fun LoginInputsAndButton(modifier: Modifier, props: LoginInputsAndButtonProps) {
                 .padding(end = 6.dp)
         ) {
             TextField(
-                value = props.state.value.email,
-                onValueChange = { props.setEmail(it) },
+                value = props.vm.state.value.email,
+                onValueChange = { props.vm.setEmail(it) },
                 placeholder = { Text(text = "Email") },
                 colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = MaterialTheme.colors.background
@@ -38,8 +36,8 @@ fun LoginInputsAndButton(modifier: Modifier, props: LoginInputsAndButtonProps) {
                 modifier = Modifier.fillMaxWidth()
             )
             TextField(
-                value = props.state.value.password,
-                onValueChange = { props.setPassword(it) },
+                value = props.vm.state.value.password,
+                onValueChange = { props.vm.setPassword(it) },
                 placeholder = { Text(text = "Password") },
                 colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = MaterialTheme.colors.background
@@ -49,24 +47,21 @@ fun LoginInputsAndButton(modifier: Modifier, props: LoginInputsAndButtonProps) {
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
-                    props.handleLogin(
+                    props.vm.handleLogin(
                         LoginPayload(
-                            email = props.state.value.email,
-                            password = props.state.value.password
+                            email = props.vm.state.value.email,
+                            password = props.vm.state.value.password
                         )
                     )
-                    props.navController.navigate("tasks")
+                    props.navigator.navigate(TasksListScreenDestination())
                 }) {
-                Text(text = if (props.state.value.loginLoading == true) "Logging in..." else "Login")
+                Text(text = if (props.vm.state.value.loginLoading == true) "Logging in..." else "Login")
             }
         }
     }
 }
 
 data class LoginInputsAndButtonProps(
-    val state: State<LoginState>,
-    val setEmail: (email: String) -> Unit,
-    val setPassword: (password: String) -> Unit,
-    val handleLogin: (loginPayload: LoginPayload) -> Unit,
-    val navController: NavHostController
+    val vm: LoginViewModel,
+    val navigator: DestinationsNavigator
 )

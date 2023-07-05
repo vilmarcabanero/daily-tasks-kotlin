@@ -43,4 +43,5 @@ class LoginViewModel @Inject constructor(private val useCases: AuthUseCases) : V
             _state.value = _state.value.copy(loginLoading = false)
         }
     }
+
 }
