@@ -1,5 +1,6 @@
 package com.entalpiya.dailytasks.feature_auth.presentation.login
 
+import android.content.Context
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -36,10 +37,10 @@ class LoginViewModel @Inject constructor(private val useCases: AuthUseCases) : V
         _state.value = _state.value.copy(password = password)
     }
 
-    fun handleLogin(loginPayload: LoginPayload) {
+    fun handleLogin(loginPayload: LoginPayload, context: Context) {
         viewModelScope.launch(errorHandler) {
             _state.value = _state.value.copy(loginLoading = true)
-            useCases.login(loginPayload)
+            useCases.login(loginPayload, context)
             _state.value = _state.value.copy(loginLoading = false)
         }
     }

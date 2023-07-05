@@ -11,6 +11,7 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.entalpiya.dailytasks.destinations.TasksListScreenDestination
 import com.entalpiya.dailytasks.feature_auth.data.data_source.api.payload.LoginPayload
@@ -20,6 +21,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
 fun LoginInputsAndButton(modifier: Modifier, props: LoginInputsAndButtonProps) {
+    val context = LocalContext.current
     Column(modifier = modifier) {
         Column(
             modifier = Modifier
@@ -51,7 +53,8 @@ fun LoginInputsAndButton(modifier: Modifier, props: LoginInputsAndButtonProps) {
                         LoginPayload(
                             email = props.vm.state.value.email,
                             password = props.vm.state.value.password
-                        )
+                        ),
+                        context
                     )
                     props.navigator.navigate(TasksListScreenDestination())
                 }) {

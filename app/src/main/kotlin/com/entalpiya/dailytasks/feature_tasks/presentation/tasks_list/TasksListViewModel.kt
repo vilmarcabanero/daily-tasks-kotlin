@@ -1,9 +1,11 @@
 package com.entalpiya.dailytasks.feature_tasks.presentation.tasks_list
 
+import android.content.Context
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.entalpiya.dailytasks.feature_auth.domain.use_case.AuthUseCases
 import com.entalpiya.dailytasks.feature_tasks.domain.model.Task
 import com.entalpiya.dailytasks.feature_tasks.domain.use_case.TasksUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +16,7 @@ import javax.inject.Inject
 import kotlin.random.Random
 
 @HiltViewModel
-class TasksListViewModel @Inject constructor(private val useCases: TasksUseCases) : ViewModel() {
+class TasksListViewModel @Inject constructor(private val useCases: TasksUseCases, private val authUseCases: AuthUseCases) : ViewModel() {
     private val _state = mutableStateOf(TasksListState())
     val state: State<TasksListState> = _state
 
@@ -82,6 +84,12 @@ class TasksListViewModel @Inject constructor(private val useCases: TasksUseCases
             useCases.deleteTask(task)
             val tasks = useCases.getTasks()
             _state.value = _state.value.copy(tasks = tasks)
+        }
+    }
+
+    suspend fun getUser(context: Context) {
+        viewModelScope.launch(errorHandler) {
+            authUseCases.getUser(context)
         }
     }
 }

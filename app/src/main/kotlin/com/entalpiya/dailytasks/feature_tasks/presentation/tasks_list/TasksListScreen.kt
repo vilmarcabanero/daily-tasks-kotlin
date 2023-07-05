@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.entalpiya.dailytasks.feature_tasks.presentation.tasks_list.components.TaskInput
@@ -22,9 +23,10 @@ import com.ramcosta.composedestinations.annotation.Destination
 @Destination
 @Composable
 fun TasksListScreen(vm: TasksListViewModel = hiltViewModel()) {
+    val context = LocalContext.current
     Surface {
         Column {
-            TaskTitle()
+            TaskTitle(context)
             TaskList(modifier = Modifier.weight(0.8f), props = TaskListProps(vm))
             TaskInput(modifier = Modifier, props = TaskInputProps(vm))
         }

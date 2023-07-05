@@ -1,5 +1,6 @@
 package com.entalpiya.dailytasks.feature_tasks.presentation.tasks_list.components
 
+import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -8,11 +9,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.entalpiya.dailytasks.feature_tasks.presentation.tasks_list.TasksListViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 @Composable
-fun TaskTitle() {
+fun TaskTitle(context: Context, vm: TasksListViewModel = hiltViewModel()) {
     val calendar = Calendar.getInstance()
     val simpleDateFormat = SimpleDateFormat("EEEE, d LLLL")
     val dateTime = simpleDateFormat.format(calendar.time).toString()
