@@ -1,22 +1,18 @@
 package com.entalpiya.dailytasks.feature_auth.presentation.login
 
-import android.content.Context
-import android.widget.Toast
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.entalpiya.dailytasks.feature_auth.data.data_source.api.AuthApiService
 import com.entalpiya.dailytasks.feature_auth.data.data_source.api.payload.LoginPayload
-import com.entalpiya.dailytasks.feature_auth.data.repository.AuthRepositoryImpl
+import com.entalpiya.dailytasks.feature_auth.domain.use_case.AuthUseCases
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class LoginViewModel : ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(private val useCases: AuthUseCases) : ViewModel() {
     private val _state = mutableStateOf(LoginState())
     val state: State<LoginState> = _state
 
@@ -38,9 +34,8 @@ class LoginViewModel : ViewModel() {
     }
 
     fun handleLogin(loginPayload: LoginPayload) {
-//        viewModelScope.launch(errorHandler) {
-//            repository.login(loginPayload)
-//        }
-        // Sobrang hirap, di ko kaya hahahaha Next.js nalang muna.
+        viewModelScope.launch(errorHandler) {
+            useCases.login(loginPayload)
+        }
     }
 }
