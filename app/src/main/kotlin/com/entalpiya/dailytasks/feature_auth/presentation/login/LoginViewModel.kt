@@ -4,6 +4,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavigatorProvider
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navigation
 import com.entalpiya.dailytasks.feature_auth.data.data_source.api.payload.LoginPayload
 import com.entalpiya.dailytasks.feature_auth.domain.use_case.AuthUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -35,7 +38,9 @@ class LoginViewModel @Inject constructor(private val useCases: AuthUseCases) : V
 
     fun handleLogin(loginPayload: LoginPayload) {
         viewModelScope.launch(errorHandler) {
+            _state.value = _state.value.copy(loginLoading = true)
             useCases.login(loginPayload)
+            _state.value = _state.value.copy(loginLoading = false)
         }
     }
 }

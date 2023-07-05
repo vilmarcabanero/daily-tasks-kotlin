@@ -9,6 +9,7 @@ import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.entalpiya.dailytasks.feature_auth.data.data_source.api.payload.LoginPayload
 import com.entalpiya.dailytasks.feature_auth.presentation.login.components.LoginInputsAndButton
 import com.entalpiya.dailytasks.feature_auth.presentation.login.components.LoginInputsAndButtonProps
@@ -29,7 +30,8 @@ fun LoginScreen(props: LoginScreenProps) {
                     props.state,
                     props.setEmail,
                     props.setPassword,
-                    props.handleLogin
+                    props.handleLogin,
+                    props.navController,
                 )
             )
         }
@@ -41,4 +43,5 @@ data class LoginScreenProps(
     val setEmail: (email: String) -> Unit,
     val setPassword: (password: String) -> Unit,
     val handleLogin: (loginPayload: LoginPayload) -> Unit,
+    val navController: NavHostController,
 )

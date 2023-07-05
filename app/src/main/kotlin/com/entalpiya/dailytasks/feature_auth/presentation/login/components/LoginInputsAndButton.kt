@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.entalpiya.dailytasks.feature_auth.data.data_source.api.payload.LoginPayload
 import com.entalpiya.dailytasks.feature_auth.presentation.login.LoginState
 
@@ -54,8 +55,9 @@ fun LoginInputsAndButton(modifier: Modifier, props: LoginInputsAndButtonProps) {
                             password = props.state.value.password
                         )
                     )
+                    props.navController.navigate("tasks")
                 }) {
-                Text(text = "Login")
+                Text(text = if (props.state.value.loginLoading == true) "Logging in..." else "Login")
             }
         }
     }
@@ -66,4 +68,5 @@ data class LoginInputsAndButtonProps(
     val setEmail: (email: String) -> Unit,
     val setPassword: (password: String) -> Unit,
     val handleLogin: (loginPayload: LoginPayload) -> Unit,
+    val navController: NavHostController
 )

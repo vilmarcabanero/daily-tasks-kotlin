@@ -52,14 +52,14 @@ class MainActivity : ComponentActivity() {
         }
         setContent {
             enTasksTheme() {
-                enTasksApp()
+                EnTasksApp()
             }
         }
     }
 
     @SuppressLint("StateFlowValueCalledInComposition")
     @Composable
-    private fun enTasksApp() {
+    private fun EnTasksApp() {
         val navController = rememberNavController()
         NavHost(navController, startDestination = "login") {
             composable("tasks") {
@@ -74,11 +74,14 @@ class MainActivity : ComponentActivity() {
             composable("login") {
                 val viewModel: LoginViewModel = hiltViewModel()
                 mainViewModel.setIsLoading(viewModel.state.value.isSplashScreenLoading)
-                LoginScreen (
-                   props = LoginScreenProps(state = viewModel.state,
-                       setEmail = { email -> viewModel.setEmail(email)},
-                       setPassword = { password -> viewModel.setPassword(password)},
-                       handleLogin = { loginPayload -> viewModel.handleLogin(loginPayload) })
+                LoginScreen(
+                    props = LoginScreenProps(
+                        state = viewModel.state,
+                        setEmail = { email -> viewModel.setEmail(email) },
+                        setPassword = { password -> viewModel.setPassword(password) },
+                        handleLogin = { loginPayload -> viewModel.handleLogin(loginPayload) },
+                        navController = navController
+                    )
                 )
             }
             composable("sign_in") {
